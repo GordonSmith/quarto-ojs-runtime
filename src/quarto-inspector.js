@@ -5,7 +5,7 @@
 *
 */
 
-import { Inspector } from "runtime";
+import { Inspector } from "@observablehq/runtime";
 
 export class QuartoInspector extends Inspector {
   constructor(node, cellAst) {

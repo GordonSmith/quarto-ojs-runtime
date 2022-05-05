@@ -5,9 +5,9 @@
 * Copyright (C) 2022 RStudio, PBC
 */
 
-import { Inspector } from "runtime";
-import { button } from "inputs";
-import { Library } from "external-observablehq-stdlib";
+import { Inspector } from "@observablehq/runtime";
+import { button } from "@observablehq/inputs";
+import { Library } from "@quarto/external-observablehq-stdlib";
 import { QuartoInspector } from "./quarto-inspector.js";
 
 const shinyInputVars = new Set();

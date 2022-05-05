@@ -15,7 +15,7 @@
 // grab FileAttachments and Library)
 
 
-import { FileAttachments, Library } from "external-observablehq-stdlib";
+import { FileAttachments, Library } from "@quarto/external-observablehq-stdlib";
 
 import { PandocCodeDecorator } from "./pandoc-code-decorator.js";
 
@@ -819,16 +819,20 @@ export function createRuntime() {
   return result;
 }
 
-// TODO "obs" or "ojs"? Inconsistent naming.
-window._ojs = {
-  ojsConnector: undefined,
+export default function initializeRuntime()
+{
+  // TODO "obs" or "ojs"? Inconsistent naming.
+  window._ojs = {
+    ojsConnector: undefined,
 
-  paths: {}, // placeholder for per-quarto-file paths
-  // necessary for module resolution
+    paths: {}, // placeholder for per-quarto-file paths
+    // necessary for module resolution
 
-  hasShiny: false, // true if we have the quarto-ojs-shiny runtime
+    hasShiny: false, // true if we have the quarto-ojs-shiny runtime
 
-  shinyElementRoot: undefined, // root element for the communication with shiny
-  // via DOM
-};
-window._ojs.runtime = createRuntime();
+    shinyElementRoot: undefined, // root element for the communication with shiny
+    // via DOM
+  };
+  window._ojs.runtime = createRuntime();
+}
+

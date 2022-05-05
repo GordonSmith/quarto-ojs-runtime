@@ -1,4 +1,6 @@
-import {terser} from "rollup-plugin-terser";
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import { terser } from "rollup-plugin-terser";
 import * as meta from "./package.json";
 
 const config = {
@@ -13,7 +15,9 @@ const config = {
     banner: `// ${meta.name} v${meta.version} Copyright ${(new Date).getFullYear()} ${meta.author.name}`,
     globals: ["$", "Shiny"]
   },
-  plugins: []
+  plugins: [commonjs(), nodeResolve({
+    mainFields: ["module", "main"],
+  })]
 };
 
 export default [
@@ -22,18 +26,16 @@ export default [
     ...config,
     output: {
       ...config.output,
-      file: `dist/quarto-ojs-runtime.min.js`
+      file: "dist/quarto-ojs-runtime.min.js",
+      name: "quarto-min",
     },
     plugins: [
       ...config.plugins,
       terser({
-        output: {
-          preamble: config.output.banner
-        },
         mangle: {
           reserved: ["RequireError"]
         }
-      })
+      }),
     ]
   }
 ];

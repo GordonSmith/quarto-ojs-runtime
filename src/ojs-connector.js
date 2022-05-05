@@ -6,16 +6,16 @@
 *
 */
 
-import { Interpreter } from "unofficial-observablehq-compiler";
+import { Interpreter } from "@alex.garcia/unofficial-observablehq-compiler";
 
 import {
   Inspector,
   Runtime,
   RuntimeError,
-} from "runtime";
+} from "@observablehq/runtime";
   
-import { parseModule } from "external-observablehq-parser";
-import { Library } from "edternal-observablehq-stdlib";
+import { parseModule } from "@quarto/external-observablehq-parser";
+import { Library } from "@quarto/external-observablehq-stdlib";
 
 //////////////////////////////////////////////////////////////////////////////
 
