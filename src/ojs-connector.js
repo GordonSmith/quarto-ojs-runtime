@@ -12,7 +12,7 @@ import {
   Inspector,
   Runtime,
   RuntimeError,
-} from "@observablehq/runtime";
+} from "@quarto/external-observablehq-runtime";
   
 import { parseModule } from "@quarto/external-observablehq-parser";
 import { Library } from "@quarto/external-observablehq-stdlib";
