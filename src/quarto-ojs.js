@@ -593,10 +593,16 @@ export function createRuntime() {
       lineBreak.remove();
     });
 
-  // select all panel elements with ids
-  const layoutDivs = Array.from(
+  // select all elements to track:
+  //   panel elements with ids, and divs with ids and .ojs-track-layout
+
+  const layoutDivs = [...Array.from(
     document.querySelectorAll("div.quarto-layout-panel div[id]")
-  );
+  ),
+  ...Array.from(
+    document.querySelectorAll('div.ojs-track-layout[id]')
+  )];
+  
   function layoutWidth() {
     return lib.Generators.observe(function (change) {
       const ourWidths = Object.fromEntries(
