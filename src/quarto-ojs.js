@@ -29,6 +29,8 @@ import { QuartoInspector } from "./quarto-inspector.js";
 
 import { OJSConnector } from "./ojs-connector.js";
 
+import { createQuartoJsxShim } from "./quarto-jsx.js";
+
 //////////////////////////////////////////////////////////////////////////////
 // Quarto-specific code starts here.
 
@@ -827,32 +829,6 @@ export function createRuntime() {
   return result;
 }
 
-function createQuartoJsxShim()
-{
-  return {
-    createElement(tag, attrs, ...children) {
-      if (typeof tag === "function") {
-        return tag({...attrs, children });
-      }
-
-      const el = document.createElement(tag); // we should try to play nice with svg etc a la d3
-      for (const [key, val] of Object.entries(attrs || {})) {
-        el.setAttribute(key, val);
-      }
-      while (children.length) {
-        const child = children.shift();
-        if (Array.isArray(child)) {
-          children.unshift(...child);
-        } else if (typeof child === "string") {
-          el.appendChild(document.createTextNode(child));
-        } else {
-          el.appendChild(child);
-        }
-      }
-      return el;
-    }
-  };
-}
 
 export default function initializeRuntime()
 {
