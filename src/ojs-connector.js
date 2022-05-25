@@ -140,7 +140,7 @@ async function defaultResolveImportPath(path) {
   specifier to mean an ES module; If the extension is "ojs", we take
   the specifier to mean an "ojs" module (a collection of observable
   statements packaged into a module, suitable for reuse). If the 
-  extension is "ts", then this is an import that was actually transpiled 
+  extension is "ts" or "tsx", then this is an import that was actually transpiled 
   into js during quarto render, and we change the extension to .js and
   resolve that. Finally, if the extension is "qmd", we take the specifier
   to mean an "implicit ojs module", equivalent to extracting all
@@ -237,7 +237,7 @@ function importPathResolver(paths, localResolverMap) {
     } else {
       // we have a relative URL here
       const resourceURL = new URL(path, window.location);
-      moduleType = resourceURL.pathname.match(/\.(ojs|js|ts|qmd)$/)[1];
+      moduleType = resourceURL.pathname.match(/\.(ojs|js|ts|tsx|qmd)$/)[1];
 
       // resolve path according to quarto path resolution rules.
       if (path.startsWith("/")) {
@@ -249,9 +249,9 @@ function importPathResolver(paths, localResolverMap) {
       }
     }
 
-    if (moduleType === "ts") {
+    if (moduleType === "ts" || moduleType === "tsx") {
       try {
-        const m = await import(importPath.replace(/\.ts$/, ".js"));
+        const m = await import(importPath.replace(/\.ts$/, ".js").replace(/\.tsx$/, ".js"));
         return es6ImportAsObservableModule(m);
       } catch (e) {
         // record the error on the browser console to make debugging
