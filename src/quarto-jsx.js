@@ -20,7 +20,7 @@ function createHtmlElement(tag, attrs, ...children) {
 function createNamespacedElement(ns, tag, attrs, ...children) {
   const el = document.createElementNS(ns, tag); // we should try to play nice with svg etc a la d3
   for (const [key, val] of Object.entries(attrs || {})) {
-    el.setAttributeNS(ns, key, val);
+    el.setAttribute(key, val);
   }
   while (children.length) {
     const child = children.shift();
