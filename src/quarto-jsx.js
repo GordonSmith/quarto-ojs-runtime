@@ -1,6 +1,7 @@
+import { escapeHtml } from "./escape.js";
 
 function createHtmlElement(tag, attrs, ...children) {
-  const el = document.createElement(tag); // we should try to play nice with svg etc a la d3
+  const el = document.createElement(tag);
   for (const [key, val] of Object.entries(attrs || {})) {
     el.setAttribute(key, val);
   }
@@ -8,17 +9,17 @@ function createHtmlElement(tag, attrs, ...children) {
     const child = children.shift();
     if (Array.isArray(child)) {
       children.unshift(...child);
-    } else if (typeof child === "string") {
-      el.appendChild(document.createTextNode(child));
-    } else {
+    } else if (child instanceof HTMLElement) {
       el.appendChild(child);
+    } else {
+      el.appendChild(document.createTextNode(escapeHtml(child)));
     }
   }
   return el;
 }
 
 function createNamespacedElement(ns, tag, attrs, ...children) {
-  const el = document.createElementNS(ns, tag); // we should try to play nice with svg etc a la d3
+  const el = document.createElementNS(ns.namespace, tag);
   for (const [key, val] of Object.entries(attrs || {})) {
     el.setAttribute(key, val);
   }
@@ -26,10 +27,10 @@ function createNamespacedElement(ns, tag, attrs, ...children) {
     const child = children.shift();
     if (Array.isArray(child)) {
       children.unshift(...child);
-    } else if (typeof child === "string") {
-      el.appendChild(document.createTextNode(child));
-    } else {
+    } else if (child instanceof HTMLElement || child instanceof ns.class) {
       el.appendChild(child);
+    } else {
+      el.appendChild(document.createTextNode(escapeHtml(child)));
     }
   }
   return el;
@@ -103,7 +104,7 @@ const resolver = {
 };
 
 const nss = {
-  "svg": "http://www.w3.org/2000/svg"
+  "svg": { namespace: "http://www.w3.org/2000/svg", class: SVGElement }
 };
 
 function resolveCreator(tag) {
@@ -114,7 +115,7 @@ function resolveCreator(tag) {
   const namespace = nss[nsKey];
 
   return function(tag, attrs, ...children) {
-    return createNamespacedElement(namespace, tag, attrs, children);
+    return createNamespacedElement(namespace, tag, attrs, ...children);
   }
 }
 
