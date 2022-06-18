@@ -792,6 +792,12 @@ export function createRuntime() {
         }
 
         const ojsDiv = targetElement.querySelector(".observablehq");
+        if (!ojsDiv) {
+          // we failed to find an observablehq div inside the targetElement.
+          // This is an internal error and we have no way to report it
+          // except throwing the original exception.
+          throw e;
+        }
         // because this is in an exception handler, we might need
         // to clear some of the garbage that other pieces of code
         // won't have the chance to

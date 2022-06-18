@@ -6,7 +6,7 @@
 *
 */
 
-import { Interpreter } from "@alex.garcia/unofficial-observablehq-compiler";
+import { Interpreter } from "@quarto/external-alex-garcia-unofficial-observablehq-compiler";
 
 import {
   Inspector,
