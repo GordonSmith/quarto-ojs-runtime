@@ -377,10 +377,10 @@
     acorn "^7.1.1"
     acorn-walk "^7.0.0"
 
-"@quarto/external-alex-garcia-unofficial-observablehq-compiler@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@quarto/external-alex-garcia-unofficial-observablehq-compiler/-/external-alex-garcia-unofficial-observablehq-compiler-0.0.3.tgz#f48892ed359e820d53da7ce5dba139278b07e25f"
-  integrity sha512-Wp+CsSPjHwJhBjCOn26vwV0zO+h+jopJWU7rFWAE98yLHhDS3RYmwXKWH51C02tgks875G703USaS4YZnX+1xw==
+"@quarto/external-alex-garcia-unofficial-observablehq-compiler@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@quarto/external-alex-garcia-unofficial-observablehq-compiler/-/external-alex-garcia-unofficial-observablehq-compiler-0.0.5.tgz#233cb980e0533933f29bd9108b9df1be4238bd03"
+  integrity sha512-hVFgMA4vxDkKpDffnUXNRHaqGXmqIlWS15W5jBYCP3Y2Q2a/4BQ/4A6mcR3dBIrNJABgy/xNtIM3bQUV6F61Zw==
   dependencies:
     "@observablehq/parser" "4.2"
     acorn-walk "^7.0.0"
