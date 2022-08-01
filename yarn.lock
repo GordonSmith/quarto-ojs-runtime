@@ -385,10 +385,10 @@
     "@observablehq/parser" "4.2"
     acorn-walk "^7.0.0"
 
-"@quarto/external-d3-d3-require@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@quarto/external-d3-d3-require/-/external-d3-d3-require-1.2.5.tgz#677268cf371f6f1e3a8ba5a301e1aafbfbce9d31"
-  integrity sha512-KFxAGzTcxu3YAUeQMvbtUaKYcs5Yace4hDfn+Qi41uB+5HlWSDWn1eDKIHsyE2udTPZNch9LJS5fH8jEW/H7Qw==
+"@quarto/external-d3-d3-require@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@quarto/external-d3-d3-require/-/external-d3-d3-require-1.3.1.tgz#1fbdbe5e1827fb4d525d117692349ab27f2f954e"
+  integrity sha512-krwlgYAxloiICIwevO5emU3srX3orV//9cDayf4C4Ki1gc/K7kJxT2FK6Jty+Rt6vrMn8KKSoimdB5Vm57+Elg==
 
 "@quarto/external-observablehq-parser@^6.0.2":
   version "6.0.2"
@@ -398,20 +398,20 @@
     acorn "8"
     acorn-walk "8"
 
-"@quarto/external-observablehq-runtime@^4.18.13":
-  version "4.21.0"
-  resolved "https://registry.yarnpkg.com/@quarto/external-observablehq-runtime/-/external-observablehq-runtime-4.21.0.tgz#e600dfe7bff641e2df969be60796c2125711dc2a"
-  integrity sha512-eIRq3jDpF/Lcg7G7ZfAH3Cn0AWAd8ZoqpuJN0F6C9dZBLOh+pOQFrlCc3GPrK5igl573KgOTWbBcYrnDGaNoFA==
+"@quarto/external-observablehq-runtime@^4.23.1":
+  version "4.23.1"
+  resolved "https://registry.yarnpkg.com/@quarto/external-observablehq-runtime/-/external-observablehq-runtime-4.23.1.tgz#58dbac155c6032805416491d7bb421be5e13e4d8"
+  integrity sha512-7B7NZM2HFla0e9XyhHsrjCj0YZd/LJF1FbtmePUSYrFUbp+624ti38pAVsRIIeo26TQNqUk9ZYUqi3uZurfJBA==
   dependencies:
     "@observablehq/inspector" "^3.2.2"
-    "@quarto/external-observablehq-stdlib" "^3.4.1"
+    "@quarto/external-observablehq-stdlib" "^3.19.9"
 
-"@quarto/external-observablehq-stdlib@^3.16.2", "@quarto/external-observablehq-stdlib@^3.4.1":
-  version "3.16.2"
-  resolved "https://registry.yarnpkg.com/@quarto/external-observablehq-stdlib/-/external-observablehq-stdlib-3.16.2.tgz#09e013afa78f7ca3ef87d173830ab73282c70f25"
-  integrity sha512-p9TxXmLS9KZ0Thj2F4csedCDNB/Cn6oL5ktluSzeF6/25fy+chfOAybJh9vTimrexY22eIRNCnvuNdJTDdLcjQ==
+"@quarto/external-observablehq-stdlib@^3.19.9":
+  version "3.19.9"
+  resolved "https://registry.yarnpkg.com/@quarto/external-observablehq-stdlib/-/external-observablehq-stdlib-3.19.9.tgz#4cd8f3e353fefacd593867e90d871daf598d81a8"
+  integrity sha512-W7GZS0do3ruhUDQWGx6dTpg4f2/q25nbw7yc8X5vdRwea+73qHap9i6LwtPs5FF4lvP2Lvjw9zTRLQxP1uyb8A==
   dependencies:
-    "@quarto/external-d3-d3-require" "^1.2.5"
+    "@quarto/external-d3-d3-require" "^1.3.1"
     d3-dsv "^2.0.0"
 
 "@rollup/plugin-commonjs@^22.0.0":

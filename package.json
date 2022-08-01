@@ -1,6 +1,6 @@
 {
   "name": "@quarto/quarto-ojs-runtime",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A runtime for quarto's support of ObservableHQ's reactive Javascript.",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -22,8 +22,8 @@
     "@observablehq/inputs": "^0.10.4",
     "@quarto/external-alex-garcia-unofficial-observablehq-compiler": "^0.0.6",
     "@quarto/external-observablehq-parser": "^6.0.2",
-    "@quarto/external-observablehq-runtime": "^4.18.13",
-    "@quarto/external-observablehq-stdlib": "^3.16.2",
+    "@quarto/external-observablehq-runtime": "^4.23.1",
+    "@quarto/external-observablehq-stdlib": "^3.19.9",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "eslint": "^7.32.0",
