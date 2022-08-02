@@ -80,7 +80,9 @@ export class PandocCodeDecorator {
     const startIndex = startEntry.index;
     const endIndex = endEntry && endEntry.index || this._elementEntryPoints.length;
     for (let i = startIndex; i < endIndex; ++i) {
-      yield this._elementEntryPoints[i];
+      if (this._elementEntryPoints[i] !== void 0) {
+        yield this._elementEntryPoints[i];
+      }
     }
   }
   decorateSpan(start, end, classes) {
@@ -117,11 +119,11 @@ export class PandocCodeDecorator {
       this._elementEntryPoints.sort((a, b) => a.offset - b.offset);
     };
     const startEntry = this.locateEntry(start);
-    if (startEntry !== void 0 && startEntry.entry.offset != start) {
+    if (startEntry !== void 0 && startEntry.entry !== void 0 && startEntry.entry.offset != start) {
       splitEntry(startEntry.entry, start);
     }
     const endEntry = this.locateEntry(end);
-    if (endEntry !== void 0 && endEntry.entry.offset !== end) {
+    if (endEntry !== void 0 && startEntry.entry !== void 0 && endEntry.entry.offset !== end) {
       splitEntry(endEntry.entry, end);
     }
   }
