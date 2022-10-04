@@ -6,16 +6,15 @@
 *
 */
 
-import { Interpreter } from "@quarto/external-alex-garcia-unofficial-observablehq-compiler";
-
 import {
   Inspector,
   Runtime,
   RuntimeError,
-} from "@quarto/external-observablehq-runtime";
+} from "@observablehq/runtime";
   
-import { parseModule } from "@quarto/external-observablehq-parser";
-import { Library } from "@quarto/external-observablehq-stdlib";
+import { parseModule } from "@hpcc-js/observable-shim";
+import { notebook } from "@hpcc-js/observablehq-compiler";
+import { Library } from "@observablehq/stdlib";
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -383,10 +382,7 @@ export class OJSConnector {
     // work.
     this.runtime = new Runtime(this.library, (name) => this.global(name));
     this.mainModule = this.runtime.module();
-    this.interpreter = new Interpreter({
-      module: this.mainModule,
-      resolveImportPath: importPathResolver(paths, this.localResolverMap),
-    });
+    this.interpreter = notebook();
     this.inspectorClass = inspectorClass || Inspector;
 
     // state to handle flash of unevaluated js because of async module imports
@@ -503,15 +499,11 @@ export class OJSConnector {
     }
   }
 
-  interpretQuiet(src) {
-    const runCell = (cell) => {
+   interpretQuiet(src) {
+    const runCell = async (cell) => {
       const cellSrc = src.slice(cell.start, cell.end);
-      const promise = this.interpreter.module(
-        cellSrc,
-        undefined,
-        (_name) => new EmptyInspector(),
-      );
-      return this.waitOnImports(cell, promise);
+      const compiledCell = await this.interpreter.set({ mode:"js", value: cellSrc });
+      return compiledCell(this.runtime, this.mainModule, (_name) => new EmptyInspector());
     };
     return this.interpretWithRunner(src, runCell);
   }

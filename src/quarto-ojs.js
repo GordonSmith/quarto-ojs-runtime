@@ -15,7 +15,7 @@
 // grab FileAttachments and Library)
 
 
-import { FileAttachments, Library } from "@quarto/external-observablehq-stdlib";
+import { FileAttachments, Library } from "@observablehq/stdlib";
 
 import { PandocCodeDecorator } from "./pandoc-code-decorator.js";
 
@@ -380,19 +380,6 @@ class QuartoOJSConnector extends OJSConnector {
             : elementCreator;
         targetElement.appendChild(element);
 
-        // TODO the unofficial interpreter always calls viewexpression observers
-        // twice, one with the name, and the next with 'viewof $name'.
-        // we check for 'viewof ' here and hide the element we're creating.
-        // this behavior appears inconsistent with OHQ's interpreter, so we
-        // shouldn't be surprised to see this fail in the future.
-        if (
-          ojsAst.id &&
-          ojsAst.id.type === "ViewExpression" &&
-          !name.startsWith("viewof ")
-        ) {
-          element.classList.add("quarto-ojs-hide");
-        }
-
         // handle output:all hiding
         //
         // if every output from a cell is is not displayed, then we
@@ -530,16 +517,12 @@ class QuartoOJSConnector extends OJSConnector {
         return new this.inspectorClass(element, ojsAst);
       };
     };
-    const runCell = (cell) => {
+    const runCell = async (cell) => {
       const targetElement =
         typeof elementGetter === "function" ? elementGetter() : elementGetter;
       const cellSrc = src.slice(cell.start, cell.end);
-      const promise = this.interpreter.module(
-        cellSrc,
-        undefined,
-        observer(targetElement, cell)
-      );
-      return this.waitOnImports(cell, promise);
+      const compiledCell = await this.interpreter.set({ mode:"js", value:cellSrc });
+      return compiledCell(this.runtime, this.mainModule, observer(targetElement, cell));
     };
     return this.interpretWithRunner(src, runCell);
   }
